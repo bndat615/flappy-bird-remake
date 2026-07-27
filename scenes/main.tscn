@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://bwmiq5fxsjnjw"]
+
+[ext_resource type="Script" uid="uid://mv36ssjbi6dk" path="res://scripts/main.gd" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://rd7hpj5tw7gi" path="res://scripts/background.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://djecfjb5wt7sf" path="res://scenes/bird.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://e02eqm7croop" path="res://scenes/ground.tscn" id="5_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://citvg2g0hfp1r" path="res://assets/sprites/getready.png" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://cf66n5xklmcwe" path="res://assets/sprites/flappybird.png" id="6_jkv2x"]
+[ext_resource type="Script" uid="uid://deoa0rfpvd54u" path="res://scripts/score_display.gd" id="6_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://ctkq5iqn15c7i" path="res://assets/sprites/guide.png" id="6_tefeu"]
+[ext_resource type="Texture2D" uid="uid://c3aaq2q7g4bxx" path="res://assets/sprites/copyright.png" id="7_muem4"]
+[ext_resource type="Script" uid="uid://pkexuxyhiid8" path="res://scripts/press_button.gd" id="8_jbj1t"]
+[ext_resource type="Texture2D" uid="uid://det4oydc8xbnq" path="res://assets/sprites/gameover.png" id="8_tipki"]
+[ext_resource type="Texture2D" uid="uid://bya28qn6y6r7i" path="res://assets/sprites/scoreboard-panel.png" id="9_85g3d"]
+[ext_resource type="Texture2D" uid="uid://bavsbhqyrgy74" path="res://assets/sprites/new-badge.png" id="10_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://bbmehhm6xd5bg" path="res://assets/sprites/play.png" id="11_eb6dy"]
+[ext_resource type="AudioStream" uid="uid://druvi66w30yw7" path="res://assets/sounds/hit.wav" id="12_a8y0u"]
+[ext_resource type="AudioStream" uid="uid://ga2tvdnbxlyf" path="res://assets/sounds/die.wav" id="13_jkv2x"]
+[ext_resource type="Script" uid="uid://74da0ymcbdix" path="res://scripts/medal_sparkle.gd" id="14_dp3eg"]
+[ext_resource type="AudioStream" uid="uid://c77f7f4vpub66" path="res://assets/sounds/swoosh.wav" id="14_jbj1t"]
+
+[node name="Main" type="Node2D" unique_id=1521618208 groups=["game"]]
+script = ExtResource("1_0wfyh")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=2020430319]
+position = Vector2(144, 256)
+script = ExtResource("1_o5qli")
+
+[node name="PipeContainer" type="Node2D" parent="." unique_id=1711711938]
+
+[node name="Bird" parent="." unique_id=1994179647 instance=ExtResource("2_sugp2")]
+position = Vector2(89, 250)
+
+[node name="PipeSpawner" type="Timer" parent="." unique_id=1286000484]
+wait_time = 1.2999999999999998
+
+[node name="Ground" parent="." unique_id=1364413480 instance=ExtResource("5_tbgi4")]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1763720153]
+
+[node name="ScoreDisplay" type="Node2D" parent="UI" unique_id=1110976259]
+position = Vector2(144, 69)
+script = ExtResource("6_o6xl0")
+gap = -4.0
+
+[node name="StartScreen" type="Node2D" parent="UI" unique_id=459262860]
+
+[node name="LogoSprite" type="Sprite2D" parent="UI/StartScreen" unique_id=1782361175]
+position = Vector2(144, 155)
+texture = ExtResource("6_jkv2x")
+
+[node name="CopyrightSprite" type="Sprite2D" parent="UI/StartScreen" unique_id=1416362509]
+position = Vector2(144, 435)
+texture = ExtResource("7_muem4")
+
+[node name="PlayButton" type="TextureButton" parent="UI/StartScreen" unique_id=2076910388]
+offset_left = 92.0
+offset_top = 346.0
+offset_right = 196.0
+offset_bottom = 404.0
+texture_normal = ExtResource("11_eb6dy")
+script = ExtResource("8_jbj1t")
+
+[node name="GamePlayScreen" type="Node2D" parent="UI" unique_id=1959920780]
+visible = false
+
+[node name="GetReadySprite" type="Sprite2D" parent="UI/GamePlayScreen" unique_id=757566937]
+position = Vector2(144, 155)
+texture = ExtResource("5_tefeu")
+
+[node name="GuideSprite" type="Sprite2D" parent="UI/GamePlayScreen" unique_id=1213066290]
+position = Vector2(144, 256)
+texture = ExtResource("6_tefeu")
+
+[node name="GameOverScreen" type="Node2D" parent="UI" unique_id=455901985]
+process_mode = 3
+scale = Vector2(0.9990544, 1)
+
+[node name="GameOverSprite" type="Sprite2D" parent="UI/GameOverScreen" unique_id=545727458]
+position = Vector2(144, 155)
+texture = ExtResource("8_tipki")
+
+[node name="ScoreboardPanel" type="Sprite2D" parent="UI/GameOverScreen" unique_id=1141960811]
+position = Vector2(144, 256)
+texture = ExtResource("9_85g3d")
+
+[node name="MedalSprite" type="Sprite2D" parent="UI/GameOverScreen" unique_id=950397978]
+position = Vector2(79, 263)
+
+[node name="MedalSparkle" type="Node2D" parent="UI/GameOverScreen/MedalSprite" unique_id=976095404]
+script = ExtResource("14_dp3eg")
+area_size = 50.0
+sparkle_count = 1
+
+[node name="FinalScoreDisplay" type="Node2D" parent="UI/GameOverScreen" unique_id=1652616593]
+position = Vector2(235, 243)
+script = ExtResource("6_o6xl0")
+digit_prefix = "digit-small"
+gap = 2.0
+alignment = "right"
+
+[node name="HighScoreDisplay" type="Node2D" parent="UI/GameOverScreen" unique_id=1307103285]
+position = Vector2(235, 285)
+script = ExtResource("6_o6xl0")
+digit_prefix = "digit-small"
+gap = 2.0
+alignment = "right"
+
+[node name="NewBadgeSprite" type="Sprite2D" parent="UI/GameOverScreen" unique_id=664730061]
+visible = false
+position = Vector2(183, 264)
+texture = ExtResource("10_ya4ey")
+
+[node name="RestartButton" type="TextureButton" parent="UI/GameOverScreen" unique_id=1292588908]
+offset_left = 92.0
+offset_top = 346.0
+offset_right = 196.00002
+offset_bottom = 404.0
+texture_normal = ExtResource("11_eb6dy")
+script = ExtResource("8_jbj1t")
+
+[node name="FlashOverlay" type="ColorRect" parent="UI" unique_id=1980051245]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="HitSound" type="AudioStreamPlayer" parent="." unique_id=1667750891]
+process_mode = 3
+stream = ExtResource("12_a8y0u")
+
+[node name="DieSound" type="AudioStreamPlayer" parent="." unique_id=1782084711]
+process_mode = 3
+stream = ExtResource("13_jkv2x")
+
+[node name="SwooshSound" type="AudioStreamPlayer" parent="." unique_id=1075318938]
+process_mode = 3
+stream = ExtResource("14_jbj1t")
+
+[connection signal="pressed" from="UI/StartScreen/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="UI/GameOverScreen/RestartButton" to="." method="_on_restart_button_pressed"]

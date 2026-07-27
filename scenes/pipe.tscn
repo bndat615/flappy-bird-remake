@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cbs04vdwdtegc"]
+
+[ext_resource type="Script" uid="uid://brlysf44hfvcm" path="res://scripts/pipe.gd" id="1_arpqm"]
+[ext_resource type="AudioStream" uid="uid://b3671mx02yhob" path="res://assets/sounds/point.wav" id="3_8p0di"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_faeo1"]
+size = Vector2(52, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3x10"]
+size = Vector2(10, 100)
+
+[node name="Pipe" type="Area2D" unique_id=582586650]
+script = ExtResource("1_arpqm")
+
+[node name="PipeBottom" type="Sprite2D" parent="." unique_id=1643392647]
+position = Vector2(0, 210)
+
+[node name="PipeBottomCollision" type="CollisionShape2D" parent="." unique_id=951333616]
+position = Vector2(0, 210)
+shape = SubResource("RectangleShape2D_faeo1")
+
+[node name="PipeTop" type="Sprite2D" parent="." unique_id=158586042]
+position = Vector2(0, -210)
+flip_v = true
+
+[node name="PipeTopCollision" type="CollisionShape2D" parent="." unique_id=330624282]
+position = Vector2(0, -210)
+shape = SubResource("RectangleShape2D_faeo1")
+
+[node name="ScoreZone" type="Area2D" parent="." unique_id=324494969]
+
+[node name="ScoreZoneCollision" type="CollisionShape2D" parent="ScoreZone" unique_id=250517098]
+position = Vector2(21, 0)
+shape = SubResource("RectangleShape2D_p3x10")
+
+[node name="PointSound" type="AudioStreamPlayer2D" parent="." unique_id=809627920]
+process_mode = 3
+stream = ExtResource("3_8p0di")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="ScoreZone" to="." method="_on_score_zone_body_entered"]

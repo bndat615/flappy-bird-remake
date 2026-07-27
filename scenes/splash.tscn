@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d0xxv4ihy3j1h"]
+
+[ext_resource type="Script" uid="uid://cb2uue61fegy0" path="res://scripts/splash.gd" id="1_10vqf"]
+[ext_resource type="Texture2D" uid="uid://ybyeewavricl" path="res://assets/sprites/studio-logo.jpg" id="2_4rrho"]
+
+[node name="Splash" type="Node2D" unique_id=26459133]
+script = ExtResource("1_10vqf")
+
+[node name="Background" type="ColorRect" parent="." unique_id=645476096]
+offset_right = 288.0
+offset_bottom = 512.0
+color = Color(0.9764706, 0.98039216, 0.9607843, 1)
+
+[node name="Logo" type="Sprite2D" parent="." unique_id=2145874517]
+position = Vector2(144, 256)
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("2_4rrho")
